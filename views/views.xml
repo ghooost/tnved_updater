@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+	<!-- Form view -->
+       <record id="view_scheduler_record_form" model="ir.ui.view">
+            <field name="name">tnvedschedule.scheduler.form</field>
+            <field name="model">tnvedschedule.scheduler</field>
+            <field name="arch" type="xml">
+                <form string="TNVED">
+            		    <group>
+            			       <field name="tnv_id"/>
+            			       <field name="tnv_name"/>
+            			       <field name="last_updated"/>
+            		    </group>
+                </form>
+            </field>
+        </record>
+
+	<!-- tree (list) view-->
+       <record id="view_scheduler_tree" model="ir.ui.view">
+            <field name="name">tnvedschedule.scheduler.tree</field>
+            <field name="model">tnvedschedule.scheduler</field>
+            <field name="arch" type="xml">
+                <tree string="TNVED">
+                  <field name="tnv_id"/>
+            			<field name="tnv_name"/>
+            			<field name="last_updated"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_scheduler_wizard" model="ir.ui.view">
+          <field name="name">Upload from file</field>
+          <field name="model">tnvedschedule.wizard</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Upload file">
+              <group>
+                <field name="upload_file"/>
+                <field name="clear_before"/>
+              </group>
+              <footer>
+                <button name="button_save" string="Save" type="object" class="oe_highlight"/>
+                <button special="cancel" string="Cancel" class="oe_link" default_focus="1"/>
+              </footer>
+            </form>
+          </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="default_tnvedschedule_scheduler_list_action">
+            <field name="name">Scheduler data</field>
+            <field name="res_model">tnvedschedule.scheduler</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first record
+                </p>
+            </field> -->
+        </record>
+
+        <record model="ir.actions.act_window" id="wizard_tnvedschedule_scheduler_list_action">
+          <field name="name">wizard_tnvedschedule_scheduler_list_action</field>
+          <field name="res_model">tnvedschedule.wizard</field>
+          <field name="view_mode">form</field>
+          <field name="view_type">form</field>
+          <field name="target">new</field>
+          <field name="view_id" ref="view_scheduler_wizard"/>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_tnvedschedule_scheduler_menu" name="TNVEDSchedule"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="tnvedschedule_scheduler_menu" name="TNVEDSchedule"
+                  parent="main_tnvedschedule_scheduler_menu"/>
+        <menuitem id="default_tnvedschedule_scheduler_menu" name="TNVEDSchedule" parent="tnvedschedule_scheduler_menu"
+                  action="default_tnvedschedule_scheduler_list_action"/>
+
+        <menuitem id="wizard_tnvedschedule_scheduler_menu" name="Update from file" parent="tnvedschedule_scheduler_menu"
+                  action="wizard_tnvedschedule_scheduler_list_action"/>
+
+    </data>
+</openerp>

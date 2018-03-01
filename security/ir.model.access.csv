@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tnvedschedule_scheduler_tnvedschedule_scheduler,tnvedschedule.scheduler,model_tnvedschedule_tnvedschedule,,1,1,1,1
